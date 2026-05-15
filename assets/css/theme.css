@@ -1642,6 +1642,7 @@ button.mfp-close:hover {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
   border-radius: 1em;
+  height: 220px; /* Fixed height for image area */
 }
 
 .portfolio-box .portfolio-img a {
@@ -1668,6 +1669,8 @@ button.mfp-close:hover {
   -webkit-transform: scale(1);
   transform: scale(1);
   width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure images cover the area without distortion */
   -webkit-transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
@@ -2028,126 +2031,182 @@ body.loaded:after {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-    /* Skills Section Styles */
-    .skill-box {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 25px;
-      height: 100%;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .skill-box:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .skill-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-  }
-  
-  .skill-header i {
-      font-size: 24px;
-      color: var(--color-gradient);
-      margin-right: 15px;
-  }
-  
-  .skill-header h4 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 600;
-  }
-  
-  .skill-item {
-      margin-bottom: 15px;
-  }
-  
-  .skill-item:last-child {
-      margin-bottom: 0;
-  }
-  
-  .skill-info {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 5px;
-  }
-  
-  .skill-info span {
-      font-size: 14px;
-  }
-  
-  .progress {
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-      overflow: hidden;
-  }
-  
-  .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
-      border-radius: 3px;
-      transition: width 1.5s ease-in-out;
-  }
+.portfolio-box {
+  height: 420px; /* same height for all cards */
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-      /* Portfolio Item Hover Effect */
-      .portfolio-img {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
+.portfolio-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.portfolio-box .portfolio-img a:before {
+  /* This is the gradient overlay on hover */
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-box .portfolio-img:hover a:before {
+  opacity: 0.1; /* Show on hover */
+}
+
+/* Portfolio Item Hover Effect (using the existing .portfolio-overlay) */
+.portfolio-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, rgba(255, 130, 243, 0.7) 0%, rgba(123, 19, 255, 0.7) 50%, rgba(64, 13, 100, 0.7) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1em; /* Match portfolio-img border-radius */
+}
+
+.portfolio-img:hover .portfolio-overlay {
+  opacity: 1;
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.overlay-content i {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Swiper Navigation Buttons */
+.swiper-portfolio-prev,
+.swiper-portfolio-next {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  transition: 0.3s;
+}
+
+.swiper-portfolio-prev:hover,
+.swiper-portfolio-next:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Modal Styles */
+.modal-content {
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.text-white li {
+  margin-bottom: 10px;
+}
+
+#testimonial h2, #testimonial h3, #testimonial p {
+  margin-bottom: 30px;
+}
+
+#testimonial .container {
+  padding-top: 50px;
+}
+
+/* Skills Section Styles */
+.skill-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 25px;
+  height: 100%;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-box:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.skill-header i {
+  font-size: 24px;
+  color: var(--color-gradient);
+  margin-right: 15px;
+}
+
+.skill-header h4 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.skill-item {
+  margin-bottom: 15px;
+}
+
+.skill-item:last-child {
+  margin-bottom: 0;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.skill-info span {
+  font-size: 14px;
+}
+
+.progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gradient-start), var(--color-gradient-end));
+  border-radius: 3px;
+  transition: width 1.5s ease-in-out;
+}
+
+.fancy-box img {
+    width: 100%;
+    height: 220px;   /* same height for all */
+    object-fit: cover; /* image crop but proper fit */
+    border-radius: 12px;
+}
+
+.fancy-box img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+    .fancy-box img {
+        height: 180px;
     }
-    
-    .portfolio-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        opacity: 0;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    .portfolio-img:hover .portfolio-overlay {
-        opacity: 1;
-    }
-    
-    .overlay-content {
-        text-align: center;
-        color: white;
-    }
-    
-    .overlay-content i {
-        font-size: 2rem;
-        margin-bottom: 10px;
-        display: block;
-    }
-    
-    /* Modal Styles */
-    .modal-content {
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .modal-body {
-        padding: 2rem;
-    }
-    .text-white li {
-      margin-bottom: 10px; /* Adjust the value as needed */
-    }
-    #testimonial h2, #testimonial h3, #testimonial p {
-      margin-bottom: 30px; /* Adds more space below each heading or paragraph */
-    }
-    
-    #testimonial .container {
-      padding-top: 50px; /* Adds top padding to the container */
-    }
-        
-    
+}
